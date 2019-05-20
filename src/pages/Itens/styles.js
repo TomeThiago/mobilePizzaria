@@ -3,44 +3,56 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
+        backgroundColor: '#424242',
+        paddingHorizontal: 10,
         //paddingTop: Platform.OS === "ios" ? getStatusBarHeight() : 0,
     },
 
+    containerTitle: {
+        height: 45,
+        paddingHorizontal: 0,
+        justifyContent: 'center',
+        backgroundColor: '#212121',
+    },
+
     titleTxt: {
-        color: '#000',
+        color: '#FFF',
         fontWeight: 'bold',
         fontSize: 20,
         alignSelf: 'center'
     },
 
     list: {
-        marginTop: 30
+        padding: 5,
+        marginTop: 10
     },
 
-    pedido: {
+    items: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 20
+        paddingVertical: 15
+    },
+
+    itemDescricao: {
+        fontSize: 14,
+        color: '#FFF'
+    },
+
+    itemQuantidade: {
+        fontSize: 14,
+        color: '#FFF'
+    },
+
+    itemPreco: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#FFF'
     },
 
     separator: {
         height: 1,
         backgroundColor: '#EEE'
-    },
-
-    pedidoInfo: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-
-    pedidoTitle: {
-        fontSize: 16,
-        color: '#333',
-        marginLeft: 10
     },
 
     floatButton: {

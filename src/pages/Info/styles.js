@@ -3,37 +3,21 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#424242',
-        alignItems: 'stretch',
-        paddingHorizontal: 30
+        paddingHorizontal: 10,
+        //paddingTop: Platform.OS === "ios" ? getStatusBarHeight() : 0,
     },
 
-    containerTitle: {
-        height: 45,
-        paddingHorizontal: 0,
-        justifyContent: 'center',
-        backgroundColor: '#212121',
+    containerPedido: {
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
-    containerTotal: {
-        marginTop: 15,
-        marginBottom: 15,
-        height: 45,
-        paddingHorizontal: 0,
-        justifyContent: 'center',
-    },
-
-    titleTotal: {
-        color: '#FFF',
-        fontWeight: 'bold',
+    titlePedido: {
         fontSize: 28,
-    },
-
-    titleTxt: {
         color: '#FFF',
         fontWeight: 'bold',
-        fontSize: 20,
-        alignSelf: 'center'
     },
 
     input: {
@@ -47,13 +31,20 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
 
-    picker: {
-        height: 50, 
-        width: 150, 
-        color: '#FFF',
-        borderColor: '#DDD'
+    containerTotal: {
+        marginTop: 15,
+        marginBottom: 15,
+        height: 45,
+        paddingHorizontal: 0,
     },
 
+    titleTotal: {
+        color: '#FFF',
+        fontWeight: 'bold',
+        fontSize: 28,
+        paddingHorizontal: 5,
+    },
+    
     floatButton: {
         position: 'absolute',
         right: 30,
@@ -65,7 +56,8 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+
 });
 
 export default styles;

@@ -1,30 +1,57 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Platform } from 'react-native';
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#424242',
+        paddingHorizontal: 10,
+        paddingTop: Platform.OS === "ios" ? getStatusBarHeight() : 0,
+    },
+
+    containerTitle: {
+        height: 45,
+        paddingHorizontal: 0,
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        //paddingTop: Platform.OS === "ios" ? getStatusBarHeight() : 0,
+        backgroundColor: '#212121',
     },
 
     titleTxt: {
-        color: '#000',
+        color: '#FFF',
         fontWeight: 'bold',
         fontSize: 20,
         alignSelf: 'center'
     },
 
     list: {
-        marginTop: 30
+        padding: 5,
+        marginTop: 10
     },
 
-    pedido: {
+    items: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingVertical: 20
+        paddingVertical: 15
+    },
+
+    pedidoContainer: {
+        justifyContent: 'center'
+    },
+
+    pedidoNumero: {
+        fontSize: 14,
+        color: '#FFF'
+    },
+
+    pedidoMesa: {
+        fontSize: 14,
+        color: '#FFF'
+    },
+
+    pedidoTotal: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#FFF'
     },
 
     separator: {
@@ -32,21 +59,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#EEE'
     },
 
-    pedidoInfo: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-
-    pedidoTitle: {
-        fontSize: 16,
-        color: '#333',
-        marginLeft: 10
-    },
-
     floatButton: {
         position: 'absolute',
         right: 30,
-        //bottom: 30 + getBottomSpace(),
+        bottom: 30 + getBottomSpace(),
         bottom: 30,
         width: 60,
         height: 60,
@@ -54,7 +70,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
 });
 
 export default styles;
