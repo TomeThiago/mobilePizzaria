@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../../services/api';
@@ -18,13 +18,28 @@ export default class Main extends Component {
 
     loadItems = async () => {
         const pedido = await AsyncStorage.getItem('@DeliveryNow: pedido');
-        const response = await api.get(`/pedido/5ccf0e0ab7c0ab3e049dda31/itens`);
+        const response = await api.get(`/pedido/${pedido}/itens`);
         this.setState({ itens:  response.data });
-        console.log(itens);
     };
 
+    loadOptions = () => {
+        Alert.alert(
+            'Alerta',
+            'Deseja excluir o item selecionado?',
+            [
+              {
+                text: 'Não',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {text: 'Sim', onPress: () => Alert.alert('Atenção','Item excluído com sucesso!')},
+            ],
+            {cancelable: false},
+          );
+    }
+
     renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => {}} style={styles.items}>
+        <TouchableOpacity onPress={() => {}} style={styles.items} onLongPress={() => this.loadOptions()}>
             <View style={styles.pedidoContainer}>
                 <Text style={styles.itemDescricao}>{item.descricao}</Text>
             </View>
@@ -33,8 +48,10 @@ export default class Main extends Component {
         </TouchableOpacity>
     );
 
-    includeItem = (ID) => {
-        //await AsyncStorage.setItem('@DeliveryNow: pedido', ID);
+    includeItem = async () => {
+        const pedido = await AsyncStorage.getItem('@DeliveryNow: pedido');
+        alert(pedido);
+        this.props.navigation.navigate('Insert');
     }
 
     render() {

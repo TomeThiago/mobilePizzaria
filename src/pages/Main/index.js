@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
-import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Main extends Component {
     state = { 
@@ -29,18 +29,19 @@ export default class Main extends Component {
     }
 
     novoPedido = async () => {
-        //const response = await api.post('/pedido', {})
-        await AsyncStorage.setItem('@DeliveryNow: pedido', '5ccf0e0ab7c0ab3e049dda31'/*response.data._id*/);
+        const response = await api.post('/pedido', {});
+        console.log(response.data.id);
+        await AsyncStorage.setItem('@DeliveryNow: pedido', response.data._id);
         this.props.navigation.navigate('Itens');
     }
 
-    /*consultarPedido = async () => {
-        await AsyncStorage.setItem('@DeliveryNow: pedido', '5ccf0e0ab7c0ab3e049dda31');
+    consultarPedido = async (ID) => {
+        await AsyncStorage.setItem('@DeliveryNow: pedido', ID);
         this.props.navigation.navigate('Itens');
-    }*/
+    }
 
     renderItem = ({ item }) => (
-        <TouchableOpacity onPress={() => {}} style={styles.items}>
+        <TouchableOpacity onPress={() => this.consultarPedido(item._id)} style={styles.items}>
             <View style={styles.pedidoContainer}>
                 <Text style={styles.pedidoNumero}>{item.numero}</Text>
             </View>
@@ -75,7 +76,7 @@ export default class Main extends Component {
                         onEndReachedThreshold={0.2}
                     />
                     
-                    <TouchableOpacity style={styles.floatButton} onPress={this.novoPedido}>
+                    <TouchableOpacity style={styles.floatButton} onPress={() => this.novoPedido()}>
                         <Icon name='add' size={24} color="#FFF" />
                     </TouchableOpacity>
                 </View>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput, ToastAndroid, Picker, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -28,17 +29,18 @@ export default class Main extends Component {
         
         const data = new FormData();
 
-        data.append('itens', {
+        data.append('item', {
             descricao: this.state.descricao,
-            tamanho: this.state.tamanho,
+            //tamanho: this.state.tamanho,
             quantidade: this.state.descricao,
             preco: this.state.descricao,
-            total: this.state.total,
+            //total: this.state.total,
         });
         
-        api.post(`/pedido/5ccf0e0ab7c0ab3e049dda31/itens`, data);
-
-        this.props.navigation.navigate('Insert');
+        const pedido = await AsyncStorage.getItem('@DeliveryNow: pedido');
+        alert(pedido);
+        console.log(data);
+        api.post(`/pedido/${pedido}}/itens`, data);
 
         ToastAndroid.show('Item adicionado com sucesso!', ToastAndroid.SHORT);
         this.props.navigation.navigate('Itens');
@@ -95,7 +97,7 @@ export default class Main extends Component {
                         <Text style={styles.titleTotal}>Total: {this.state.total.toFixed(2)}</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.floatButton} onPress={this.backinItem}>
+                    <TouchableOpacity style={styles.floatButton} onPress={() => this.backinItem()}>
                         <Icon name='save' size={24} color="#FFF" />
                     </TouchableOpacity>
             </View>
